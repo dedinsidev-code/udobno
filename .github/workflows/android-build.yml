@@ -22,8 +22,11 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Grant execute permission for Gradle (Windows batch)
-        run: git update-index --chmod=+x gradlew.bat
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate Gradle wrapper
+        run: gradle wrapper
 
       - name: Build debug APK
         run: ./gradlew.bat assembleDebug
