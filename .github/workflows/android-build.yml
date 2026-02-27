@@ -24,9 +24,12 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          # AGP 8.2.x совместим с Gradle 8.2.x; Gradle 9.x ломает сборку (HasConvention)
+          gradle-version: 8.2
 
       - name: Generate Gradle wrapper
-        run: gradle wrapper
+        run: gradle wrapper --gradle-version 8.2
 
       - name: Build debug APK
         run: ./gradlew.bat assembleDebug
